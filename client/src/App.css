@@ -1,0 +1,20 @@
+* {
+  font-family: "Roboto Slab", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* Hide scrollbar in WebKit browsers (Chrome, Safari) */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar in Firefox */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar in IE/Edge */
+.no-scrollbar {
+  msoverflowstyle: none;
+}
+
