@@ -54,19 +54,26 @@ const Signup: React.FC = () => {
 
   const axiosInstance = createAxiosInstance();
 
+  ///logic to submit signup form
   const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     setIsSubmitting(true);
     try {
       const response = await axiosInstance.post('/v2/auth/register', data);
       const successMessage = response.data?.message || 'Signup successful! Redirecting to login...';
       toast.success(successMessage, {
-        autoClose: 2000,
+        autoClose: 5000,
       });
-      navigate('/login');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+
     } catch (error) {
       let errorMessage = 'Sorry, something went wrong. Please try again.';
       if (axios.isAxiosError(error) && error.response) {
-        errorMessage = error.response.data?.message || errorMessage;
+        const { status, data } = error.response;
+        if (status === 400) {
+          errorMessage = data.error || data.message || errorMessage;
+        }
       }
       toast.error(errorMessage, {
         autoClose: 5000,
@@ -75,6 +82,7 @@ const Signup: React.FC = () => {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <>

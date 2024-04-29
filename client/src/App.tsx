@@ -19,7 +19,7 @@ const App: React.FC = () => {
     <Router>
       <div className="flex h-screen">
         <section>
-          <Navbar /> {/* Include the Navbar */}
+          <Navbar />
         </section>
         <section className={`w-full ${bodyBg} py-4 px-4 overflow-y-auto no-scrollbar`}>
           <Routes>
@@ -32,9 +32,7 @@ const App: React.FC = () => {
               <Route path="tasks" element={<TaskCreation />} />
               <Route path="profile" element={<Profile />} />
             </Route>
-
-             {/* Catch-All Route for 404 */}
-             <Route path="*" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </section>
       </div>
