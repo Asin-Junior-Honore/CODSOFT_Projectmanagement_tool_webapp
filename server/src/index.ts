@@ -7,9 +7,14 @@ import authRoutes from './routes/authRoutes';
 dotenv.config();
 const app = express();
 const corsOptions = {
-    origin: ['http://localhost:5173', 'https://asinhonore-projectmanagement-web-app.netlify.app'],
-    credentials: true,
+    origin: ['http://localhost:5173', 'https://asinhonore-projectmanagement-web-app.netlify.app'], // Allow multiple origins
+    credentials: true, // Allow credentials for secure interactions
+    allowedHeaders: ['Content-Type', 'Authorization'], // Include headers typically used with authenticated requests
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Specify allowed HTTP methods
+    preflightContinue: false, // Stop preflight requests from proceeding to the next middleware
+    optionsSuccessStatus: 204, // HTTP status for successful OPTIONS preflight response
 };
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

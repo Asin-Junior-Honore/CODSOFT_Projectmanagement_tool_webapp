@@ -62,6 +62,8 @@ export const login = async (req: Request, res: Response) => {
         // Set cookie with maxAge for 7 days (7 * 24 * 60 * 60 * 1000)
         res.cookie('Usertoken', token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
+            secure: true,
+            sameSite: 'none'
         });
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
