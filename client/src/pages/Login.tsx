@@ -43,34 +43,52 @@ const Login: React.FC = () => {
   const axiosInstance = createAxiosInstance();
 
   ///logic to submit login form
+
+
   const onSubmit: SubmitHandler<{ email: string; password: string }> = async (data) => {
     setIsSubmitting(true);
+
     try {
-      const response = await axiosInstance.post('/v2/auth/login', data);
+      const response = await axiosInstance.post(
+        '/v2/auth/login',
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json', // Explicitly set content type
+          },
+          // Ensure CORS mode is set
+          timeout: 10000, // Set a timeout of 10 seconds for the request
+        }
+      );
+
       toast.success(response.data.message || 'Login successful!', {
-        autoClose: 3000,
+        autoClose: 3000, // Shorter timeout for success messages
       });
+
+      // Delay navigation to ensure toast displays
       setTimeout(() => {
         navigate('/protected/dashboard');
-      }, 2000);
+      }, 2000); // Adjust delay as needed
+
     } catch (error) {
       let errorMessage = 'An error occurred during login. Please try again.';
+
       if (axios.isAxiosError(error) && error.response) {
         const { status, data } = error.response;
+
         if (status === 400) {
-          errorMessage = data.error || data.message || 'Bad request.';
+          errorMessage = data.error || data.message || errorMessage; // Detailed error message
         }
       }
+
       toast.error(errorMessage, {
-        autoClose: 5000,
+        autoClose: 5000, // Longer timeout for error messages
       });
+
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false); // Reset the submitting state
     }
   };
-
-
-
 
 
   return (
