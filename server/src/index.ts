@@ -9,11 +9,6 @@ const app = express();
 const corsOptions = {
     origin: 'https://asinhonore-projectmanagement-web-app.netlify.app', // Allow requests from your frontend
     credentials: true, // Allow cookies and other credentials
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
-    allowedHeaders: '*', // Allow all headers
-    exposedHeaders: ['Content-Length', 'Content-Type', 'Authorization'], // Expose certain headers to the client
-    preflightContinue: false, // Whether to pass the preflight request to the next middleware
-    optionsSuccessStatus: 204, // HTTP status for successful OPTIONS preflight requests
 };
 
 app.set("trust proxy", 1)

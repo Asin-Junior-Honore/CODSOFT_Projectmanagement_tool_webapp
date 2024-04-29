@@ -64,7 +64,6 @@ export const login = async (req: Request, res: Response) => {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             secure: true,
             sameSite: 'none',
-            path: '/'
         });
         res.status(200).json({ message: 'Login successful' });
     } catch (error) {
