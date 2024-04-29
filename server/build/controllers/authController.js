@@ -73,7 +73,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.cookie('Usertoken', token, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             secure: true,
-            sameSite: 'none'
+            sameSite: 'none',
+            path: '/'
         });
         res.status(200).json({ message: 'Login successful' });
     }

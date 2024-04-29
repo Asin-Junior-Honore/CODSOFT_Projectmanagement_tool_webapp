@@ -16,7 +16,7 @@ const corsOptions = {
     optionsSuccessStatus: 204, // HTTP status for successful OPTIONS preflight requests
 };
 
-//app.set("trust proxy", 1)
+app.set("trust proxy", 1)
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
