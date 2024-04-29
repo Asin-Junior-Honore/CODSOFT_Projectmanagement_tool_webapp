@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import clsx from 'clsx';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
 // Interface for task data
 interface Task {
@@ -115,6 +116,12 @@ const Projects: React.FC = () => {
                 <div className="text-center text-blue-600 text-2xl mt-6">
 
                     <h3>you have no task available at the moment</h3>
+                    <Link
+                        to="/protected/tasks"
+                        className="mt-6 inline-block bg-blue-500 text-white font-bold py-2 px-6 rounded hover:bg-blue-600"
+                    >
+                        Create one or assign tasks now
+                    </Link>
                 </div>
             ) : (
                 tasks.map((task) => (

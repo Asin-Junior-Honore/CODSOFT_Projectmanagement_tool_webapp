@@ -12,10 +12,10 @@ interface UserProfile {
 }
 
 const UserProfile: React.FC = () => {
-    const [userData, setUserData] = useState<UserProfile | null>(null); // State to store user profile
-    const [loading, setIsLoading] = useState(true); // State for loading indicator
-    const [error, setError] = useState<string | null>(null); // State for error handling
-    const [cookies] = useCookies(['Usertoken']); // Fetch token from cookies
+    const [userData, setUserData] = useState<UserProfile | null>(null);
+    const [loading, setIsLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [cookies] = useCookies(['Usertoken']);
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -30,17 +30,17 @@ const UserProfile: React.FC = () => {
                     }
                 );
 
-                setUserData(response.data); // Set the fetched user data
+                setUserData(response.data);
             } catch (err) {
                 console.error('Error fetching user profile:', err);
-                setError('Failed to fetch user profile. Please try again later.'); // Set the error message
+                setError('Failed to fetch user profile. Please try again later.');
             } finally {
-                setIsLoading(false); // End loading state
+                setIsLoading(false);
             }
         };
 
-        fetchUserProfile(); // Fetch the profile data when the component mounts
-    }, [cookies]); // Re-run if cookies change
+        fetchUserProfile();
+    }, [cookies]);
 
     if (loading) {
         return (
@@ -63,7 +63,7 @@ const UserProfile: React.FC = () => {
     if (userData) {
         return (
             <div className="max-w-2xl mx-auto py-16 px-6 sm:px-8">
-                <h1 className="text-4xl font-bold text-gray-800 text-center">User Profile 👤</h1>
+                <h1 className="text-4xl font-bold text-gray-800 text-center">User Profile</h1>
                 <div className="mt-8 bg-white p-8 rounded-lg shadow-xl border border-gray-200">
                     {/* Full Name */}
                     <div className="flex items-center mb-6">
