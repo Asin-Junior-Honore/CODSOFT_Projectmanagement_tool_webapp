@@ -2,7 +2,7 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:5050/v2/auth",
+  "proxy": "https://codsoft-projectmanagement-tool-webapp.onrender.com",
   "type": "module",
   "scripts": {
     "dev": "vite",
