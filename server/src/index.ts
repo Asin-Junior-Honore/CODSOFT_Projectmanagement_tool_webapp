@@ -9,6 +9,7 @@ const app = express();
 const corsOptions = {
     origin: 'https://asinhonore-projectmanagement-web-app.netlify.app', // Allow multiple origins
     credentials: true, // Allow credentials for secure interactions
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 };
 app.set("trust proxy", 1)
 app.use(cors(corsOptions));
