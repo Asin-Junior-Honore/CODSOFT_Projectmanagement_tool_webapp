@@ -7,11 +7,16 @@ import authRoutes from './routes/authRoutes';
 dotenv.config();
 const app = express();
 const corsOptions = {
-    origin: 'https://asinhonore-projectmanagement-web-app.netlify.app', // Allow multiple origins
-    credentials: true, // Allow credentials for secure interactions
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: 'https://asinhonore-projectmanagement-web-app.netlify.app', // Allow requests from your frontend
+    credentials: true, // Allow cookies and other credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+    allowedHeaders: '*', // Allow all headers
+    exposedHeaders: ['Content-Length', 'Content-Type', 'Authorization'], // Expose certain headers to the client
+    preflightContinue: false, // Whether to pass the preflight request to the next middleware
+    optionsSuccessStatus: 204, // HTTP status for successful OPTIONS preflight requests
 };
-app.set("trust proxy", 1)
+
+//app.set("trust proxy", 1)
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
