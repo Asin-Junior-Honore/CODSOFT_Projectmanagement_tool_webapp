@@ -32,7 +32,7 @@ const TaskCreation: React.FC = () => {
                 newTask,
                 { withCredentials: true }
             );
-            // console.log(response
+            console.log(response)
             setNewTask({
                 name: '',
                 description: '',
@@ -131,7 +131,7 @@ const TaskCreation: React.FC = () => {
                 <button
                     onClick={handleCreateTask}
                     className={`mt-6 bg-blue-500 text-white w-full py-3 px-6 rounded hover:bg-blue-600 ${loading ? 'opacity-50' : ''}`}
-                    disabled={loading} // Disable button while loading
+                    disabled={loading}
                 >
                     <FaPlus className="inline mr-2" /> Create Task
                 </button>
