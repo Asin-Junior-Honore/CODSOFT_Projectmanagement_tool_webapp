@@ -16,6 +16,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
+import { IoClose } from 'react-icons/io5';
 
 const Navbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -58,130 +59,138 @@ const Navbar: React.FC = () => {
 
     return (
         <div className="flex h-screen">
+            <div className='absolute top-[8px] ml-5 lg:hidden'>
+                <button onClick={toggleSidebar} className="p-1 rounded-sm absolute text-2xl sm:hidden  bg-blue-400">
+                    <FaBars />
+                </button>
+            </div>
             <ToastContainer />
             <div
                 className={clsx(
                     'bg-gray-800 text-white transition-transform',
-                    isOpen ? 'w-56' : 'w-20',
+                    isOpen ? 'w-56' : 'w-0',
+                    'sm:w-56',
+                    'fixed sm:relative',
+                    isOpen ? 'translate-x-0' : '-translate-x-full',
+                    'overflow-hidden z-20 h-full',
                 )}
             >
                 <div className="flex items-center justify-between p-4 border-b border-gray-700">
-                    <Link to={'/'}>
-                        {
-                            isOpen ? (<span className="text-lg font-bold">TaskAsin</span>) : (<span className="text-lg font-bold">TA</span>)
-                        }
+                    <Link to="/">
+                        <span className="text-lg font-bold">{isOpen ? 'TaskAsin' : 'TA'}</span>
                     </Link>
-                    <button onClick={toggleSidebar} className="p-2">
-                        <FaBars />
+                    <button onClick={toggleSidebar} className="p-1 rounded-sm sm:hidden bg-blue-400"> {/* Only show button on mobile */}
+                        <IoClose className='text-3xl text-black' />
                     </button>
                 </div>
 
-                <nav className="mt-4">
-                    <ul className='space-y-3'>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/" className="flex items-center space-x-2">
-                                <FaHome />
-                                {isOpen && <span>Home</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/profile' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/profile" className="flex items-center space-x-2">
-                                <FaUser />
-                                {isOpen && <span>Profile</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/dashboard' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/dashboard" className="flex items-center space-x-2">
-                                <FaHome />
-                                {isOpen && <span>Dashboard</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/projects' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/projects" className="flex items-center space-x-2">
-                                <FaProjectDiagram />
-                                {isOpen && <span>Projects</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/tasks' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/tasks" className="flex items-center space-x-2">
-                                <FaTasks />
-                                {isOpen && <span>Tasks</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/team' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/team" className="flex items-center space-x-2">
-                                <FaUsers />
-                                {isOpen && <span>Team</span>}
-                            </Link>
-                        </li>
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/settings' && 'bg-gray-700',
-                            )}
-                        >
-                            <Link to="/protected/settings" className="flex items-center space-x-2">
-                                <FaCog />
-                                {isOpen && <span>Settings</span>}
-                            </Link>
-                        </li>
-
-                        <li
-                            className={clsx(
-                                'p-2 hover:bg-gray-700 transition-colors',
-                                location.pathname === '/protected/logout' && 'bg-gray-700',
-                            )}
-                        >
-                            {isAuthenticated ? (
-                                <button
-                                    onClick={handleLogout}
-                                    className="flex items-center space-x-2 text-white"
-                                >
-                                    <FaSignOutAlt />
-                                    {isOpen && <span>Logout</span>}
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={handleLogin}
-                                    className="flex items-center space-x-2 text-white"
-                                >
-                                    <FaSignInAlt />
-                                    {isOpen && <span>Login</span>}
-                                </button>
-                            )}
-                        </li>
-                    </ul>
-                </nav>
+                {isOpen && (
+                    <nav className="mt-4">
+                        <ul className="space-y-3">
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/" className="flex items-center space-x-2">
+                                    <FaHome />
+                                    {isOpen && <span>Home</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/profile' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/profile" className="flex items-center space-x-2">
+                                    <FaUser />
+                                    {isOpen && <span>Profile</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/dashboard' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/dashboard" className="flex items-center space-x-2">
+                                    <FaHome />
+                                    {isOpen && <span>Dashboard</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/projects' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/projects" className="flex items-center space-x-2">
+                                    <FaProjectDiagram />
+                                    {isOpen && <span>Projects</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/tasks' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/tasks" className="flex items-center space-x-2">
+                                    <FaTasks />
+                                    {isOpen && <span>Tasks</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/team' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/team" className="flex items-center space-x-2">
+                                    <FaUsers />
+                                    {isOpen && <span>Team</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/settings' && 'bg-gray-700',
+                                )}
+                            >
+                                <Link to="/protected/settings" className="flex items-center space-x-2">
+                                    <FaCog />
+                                    {isOpen && <span>Settings</span>}
+                                </Link>
+                            </li>
+                            <li
+                                className={clsx(
+                                    'p-2 hover:bg-gray-700 transition-colors',
+                                    location.pathname === '/protected/logout' && 'bg-gray-700',
+                                )}
+                            >
+                                {isAuthenticated ? (
+                                    <button
+                                        onClick={handleLogout}
+                                        className="flex items-center space-x-2 text-white"
+                                    >
+                                        <FaSignOutAlt />
+                                        {isOpen && <span>Logout</span>}
+                                    </button>
+                                ) : (
+                                    <button
+                                        onClick={handleLogin}
+                                        className="flex items-center space-x-2 text-white"
+                                    >
+                                        <FaSignInAlt />
+                                        {isOpen && <span>Login</span>}
+                                    </button>
+                                )}
+                            </li>
+                        </ul>
+                    </nav>
+                )}
             </div>
         </div>
     );

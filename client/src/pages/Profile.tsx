@@ -62,31 +62,32 @@ const UserProfile: React.FC = () => {
 
     if (userData) {
         return (
-            <div className="max-w-2xl mx-auto py-16 px-6 sm:px-8">
-                <h1 className="text-4xl font-bold text-gray-800 text-center">User Profile</h1>
-                <div className="mt-8 bg-white p-8 rounded-lg shadow-xl border border-gray-200">
+            <div className="max-w-2xl mx-auto py-12 sm:py-16 px-4 sm:px-6 md:px-8 lg:px-10">
+                <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center">User Profile</h1>
+
+                <div className="mt-8 bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-gray-200">
                     {/* Full Name */}
-                    <div className="flex items-center mb-6">
-                        <FaUser className="text-3xl text-blue-500" />
-                        <h2 className="ml-4 text-2xl font-semibold">{userData.fullName}</h2>
+                    <div className="flex flex-col sm:flex-row items-center mb-6">
+                        <FaUser className="text-2xl sm:text-3xl text-blue-500" />
+                        <h2 className="mt-2 sm:mt-0 sm:ml-4 text-xl sm:text-2xl font-semibold">{userData.fullName}</h2>
                     </div>
 
                     {/* Email */}
-                    <div className="flex items-center mb-6">
-                        <FaEnvelope className="text-3xl text-blue-500" />
-                        <span className="ml-4 text-xl text-gray-700">{userData.email}</span>
+                    <div className="flex flex-col sm:flex-row items-center mb-6">
+                        <FaEnvelope className="text-2xl sm:text-3xl text-blue-500" />
+                        <span className="mt-2 sm:mt-0 sm:ml-4 text-lg sm:text-xl text-gray-700">{userData.email}</span>
                     </div>
 
                     {/* Gender */}
-                    <div className="flex items-center mb-6">
-                        <FaTransgenderAlt className="text-3xl text-blue-500" />
-                        <span className="ml-4 text-xl text-gray-700">{userData.gender}</span>
+                    <div className="flex flex-col sm:flex-row items-center mb-6">
+                        <FaTransgenderAlt className="text-2xl sm:text-3xl text-blue-500" />
+                        <span className="mt-2 sm:mt-0 sm:ml-4 text-lg sm:text-xl text-gray-700">{userData.gender}</span>
                     </div>
 
                     {/* Username */}
-                    <div className="flex items-center mb-6">
-                        <FaUser className="text-3xl text-blue-500" />
-                        <span className="ml-4 text-xl text-gray-700">Username: {userData.username}</span>
+                    <div className="flex flex-col sm:flex-row items-center mb-6">
+                        <FaUser className="text-2xl sm:text-3xl text-blue-500" />
+                        <span className="mt-2 sm:mt-0 sm:ml-4 text-lg sm:text-xl text-gray-700">Username: {userData.username}</span>
                     </div>
                 </div>
             </div>
