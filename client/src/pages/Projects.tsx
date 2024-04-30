@@ -23,14 +23,18 @@ interface Task {
 const Projects: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [_] = useCookies(['UserToken']);
+    const [cookies] = useCookies(['UserToken']);
 
     //logic to fetch tasks both personal or asssigned
     const fetchTasks = async () => {
         setLoading(true);
         try {
             const response = await axios.get('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/assigned-tasks', {
-                withCredentials: true,
+
+                headers: {
+                    Authorization: `Bearer ${cookies.UserToken}`,
+                },
+
             });
 
             const tasksData = response.data.tasks || [];
@@ -59,7 +63,11 @@ const Projects: React.FC = () => {
             await axios.patch(
                 `https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${task._id}/status`,
                 { status: newStatus },
-                { withCredentials: true }
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookies.UserToken}`,
+                    },
+                }
             );
 
             setTasks(tasks.map((t) => (t._id === task._id ? { ...t, status: newStatus } : t)));
@@ -79,7 +87,11 @@ const Projects: React.FC = () => {
             await axios.patch(
                 `https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${task._id}/status`,
                 { status: newStatus },
-                { withCredentials: true }
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookies.UserToken}`,
+                    },
+                }
             );
 
             setTasks(tasks.map((t) => (t._id === task._id ? { ...t, status: newStatus } : t)));
@@ -92,7 +104,11 @@ const Projects: React.FC = () => {
     const deleteTask = async (taskId: string) => {
         try {
             await axios.delete(`https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${taskId}`, {
-                withCredentials: true,
+
+                headers: {
+                    Authorization: `Bearer ${cookies.UserToken}`,
+                },
+
             });
 
             setTasks(tasks.filter((t) => t._id !== taskId));

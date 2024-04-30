@@ -23,7 +23,7 @@ const UserProfile: React.FC = () => {
                 const response = await axios.get<UserProfile>(
                     'https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/profile',
                     {
-                        withCredentials: true,
+
                         headers: {
                             Authorization: `Bearer ${cookies.UserToken}`,
                         },

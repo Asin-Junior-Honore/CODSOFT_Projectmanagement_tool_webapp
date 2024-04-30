@@ -10,13 +10,18 @@ const Dashboard: React.FC = () => {
     const [personalTasksCount, setPersonalTasksCount] = useState<number>(0);
     const [assignedTasksCount, setAssignedTasksCount] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
-    const [_] = useCookies(['UserToken']);
+    const [cookies] = useCookies(['UserToken']);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
                 const response = await axios.get('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/dashboard', {
-                    withCredentials: true,
+
+
+                    headers: {
+                        Authorization: `Bearer ${cookies.UserToken}`,
+                    },
+
                 });
 
                 const data = response.data;
