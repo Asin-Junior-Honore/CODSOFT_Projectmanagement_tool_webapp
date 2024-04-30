@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 // Constants
 const BASE_URL = 'https://codsoft-projectmanagement-tool-webapp.onrender.com';
@@ -29,6 +30,7 @@ const createAxiosInstance = () => {
 
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [_, setCookie] = useCookies(['UserToken']);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -42,53 +44,45 @@ const Login: React.FC = () => {
 
   const axiosInstance = createAxiosInstance();
 
-  ///logic to submit login form
-
 
   const onSubmit: SubmitHandler<{ email: string; password: string }> = async (data) => {
     setIsSubmitting(true);
-
     try {
-      const response = await axiosInstance.post(
-        '/v2/auth/login',
-        data,
-        {
-          headers: {
-            'Content-Type': 'application/json', // Explicitly set content type
-          },
-          // Ensure CORS mode is set
-          timeout: 10000, // Set a timeout of 10 seconds for the request
-        }
-      );
+      const response = await axiosInstance.post('/v2/auth/login', data);
 
-      toast.success(response.data.message || 'Login successful!', {
-        autoClose: 3000, // Shorter timeout for success messages
-      });
-
-      // Delay navigation to ensure toast displays
-      setTimeout(() => {
-        navigate('/protected/dashboard');
-      }, 2000); // Adjust delay as needed
-
-    } catch (error) {
-      let errorMessage = 'An error occurred during login. Please try again.';
-
-      if (axios.isAxiosError(error) && error.response) {
-        const { status, data } = error.response;
-
-        if (status === 400) {
-          errorMessage = data.error || data.message || errorMessage; // Detailed error message
-        }
+      // Store the user token in the cookies
+      console.log(response.data.Usertoken)
+      const userToken = response.data.Usertoken; // Assume the token is in 'userToken' key
+      if (userToken) {
+        setCookie('UserToken', userToken);
       }
 
-      toast.error(errorMessage, {
-        autoClose: 5000, // Longer timeout for error messages
+      toast.success(response.data.message || 'Login successful!', {
+        autoClose: 3000,
       });
 
+      // Redirect after a delay
+      setTimeout(() => {
+        navigate('/protected/dashboard');
+      }, 2000);
+    } catch (error) {
+      let errorMessage = 'An error occurred during login. Please try again.';
+      if (axios.isAxiosError(error) && error.response) {
+        const { status, data } = error.response;
+        if (status === 400) {
+          errorMessage = data.error || data.message || 'Bad request.';
+        }
+      }
+      toast.error(errorMessage, {
+        autoClose: 5000,
+      });
     } finally {
-      setIsSubmitting(false); // Reset the submitting state
+      setIsSubmitting(false);
     }
   };
+
+
+
 
 
   return (

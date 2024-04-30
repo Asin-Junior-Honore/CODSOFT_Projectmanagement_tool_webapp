@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Constants
-const BASE_URL = 'http://localhost:5050';
+const BASE_URL = 'https://codsoft-projectmanagement-tool-webapp.onrender.com';
 
 // Validation Schema
 const signupSchema = yup.object({

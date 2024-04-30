@@ -4,13 +4,12 @@ import { useCookies } from 'react-cookie';
 const PrivateRoutes = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [cookies] = useCookies(['Usertoken']);
+  const [cookies] = useCookies(['UserToken']);
   useEffect(() => {
-    const tokenExists = !!cookies.Usertoken;
+    const tokenExists = !!cookies.UserToken;
     setIsAuthenticated(tokenExists);
     if (loading && tokenExists) {
       setLoading(false);
-      // window.location.reload(); // Reload the page if authentication state changes from loading to authenticated
     } else {
       setLoading(false);
     }

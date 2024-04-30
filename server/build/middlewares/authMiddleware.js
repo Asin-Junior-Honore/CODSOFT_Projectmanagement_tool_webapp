@@ -9,7 +9,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 // Middleware to authenticate JWT tokens
 const authenticateJWT = (req, res, next) => {
-    const token = req.cookies.Usertoken; // Retrieve from cookies or other sources
+    const token = req.cookies.UserToken; // Retrieve from cookies or other sources
     if (!token) {
         return res.status(401).json({ error: 'Access denied. No token provided.' });
     }

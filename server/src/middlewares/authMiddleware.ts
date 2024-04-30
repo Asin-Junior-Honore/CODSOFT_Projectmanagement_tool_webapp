@@ -12,7 +12,7 @@ export const authenticateJWT = (
     res: Response,
     next: NextFunction
 ) => {
-    const token = req.cookies.Usertoken; // Retrieve from cookies or other sources
+    const token = req.cookies.UserToken; // Retrieve from cookies or other sources
 
     if (!token) {
         return res.status(401).json({ error: 'Access denied. No token provided.' });

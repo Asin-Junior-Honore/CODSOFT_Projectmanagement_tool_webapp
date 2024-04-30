@@ -22,23 +22,23 @@ const Navbar: React.FC = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
-    const [cookies, _, removeCookie] = useCookies(['Usertoken']);
+    const [cookies, _, removeCookie] = useCookies(['UserToken']);
 
     // Toggle sidebar
     const toggleSidebar = () => setIsOpen(!isOpen);
 
     useEffect(() => {
-        const tokenExists = !!cookies.Usertoken;
+        const tokenExists = !!cookies.UserToken;
         setIsAuthenticated(tokenExists);
     }, [cookies]);
 
     const handleLogout = async () => {
         try {
-            await axios.post('http://localhost:5050/v2/auth/logout', {}, {
+            await axios.post('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/logout', {}, {
                 withCredentials: true,
             });
 
-            removeCookie('Usertoken');
+            removeCookie('UserToken');
             toast.success('Logout successful!', { autoClose: 2000 });
 
             setIsAuthenticated(false);

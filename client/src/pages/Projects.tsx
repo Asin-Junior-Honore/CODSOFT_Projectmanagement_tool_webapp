@@ -23,13 +23,13 @@ interface Task {
 const Projects: React.FC = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [_] = useCookies(['Usertoken']);
+    const [_] = useCookies(['UserToken']);
 
     //logic to fetch tasks both personal or asssigned
     const fetchTasks = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:5050/v2/auth/assigned-tasks', {
+            const response = await axios.get('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/assigned-tasks', {
                 withCredentials: true,
             });
 
@@ -57,7 +57,7 @@ const Projects: React.FC = () => {
 
         try {
             await axios.patch(
-                `http://localhost:5050/v2/auth/tasks/${task._id}/status`,
+                `https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${task._id}/status`,
                 { status: newStatus },
                 { withCredentials: true }
             );
@@ -77,7 +77,7 @@ const Projects: React.FC = () => {
 
         try {
             await axios.patch(
-                `http://localhost:5050/v2/auth/tasks/${task._id}/status`,
+                `https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${task._id}/status`,
                 { status: newStatus },
                 { withCredentials: true }
             );
@@ -91,7 +91,7 @@ const Projects: React.FC = () => {
 
     const deleteTask = async (taskId: string) => {
         try {
-            await axios.delete(`http://localhost:5050/v2/auth/tasks/${taskId}`, {
+            await axios.delete(`https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${taskId}`, {
                 withCredentials: true,
             });
 

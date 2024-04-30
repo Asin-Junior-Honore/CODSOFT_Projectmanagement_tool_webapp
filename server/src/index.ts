@@ -7,11 +7,10 @@ import authRoutes from './routes/authRoutes';
 dotenv.config();
 const app = express();
 const corsOptions = {
-    origin: 'https://asinhonore-projectmanagement-web-app.netlify.app', // Allow requests from your frontend
-    credentials: true, // Allow cookies and other credentials
+    origin: ['https://asinhonore-projectmanagement-web-app.netlify.app', 'http://localhost:5173'],
+    credentials: true,
 };
 
-app.set("trust proxy", 1)
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
