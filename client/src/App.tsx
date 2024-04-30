@@ -10,12 +10,13 @@ import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import TaskCreation from './pages/Tasks';
 import Projects from './pages/Projects';
+import NotFoundPage from './components/Notfound';
 const App: React.FC = () => {
   return (
     <Router>
       <div className="flex h-screen">
         <section>
-          <Navbar /> {/* Include the Navbar */}
+          <Navbar />
         </section>
         <section className="w-full bg-gradient-to-r from-blue-100 to-blue-300 py-[1rem] px-4 overflow-y-auto no-scrollbar">
           <Routes>
@@ -28,6 +29,7 @@ const App: React.FC = () => {
               <Route path="tasks" element={<TaskCreation />} />
               <Route path="profile" element={<Profile />} />
             </Route>
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </section>
       </div>
