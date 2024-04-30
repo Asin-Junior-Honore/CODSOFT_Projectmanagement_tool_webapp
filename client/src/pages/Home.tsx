@@ -7,7 +7,7 @@ const HomePage = () => {
             {/* Hero Section */}
             <div className="text-center">
                 <h1 className="text-4xl font-bold text-gray-800">Welcome to Asin ProjectManager</h1>
-                <p className="text-gray-600 mt-4">
+                <p className="mt-4">
                     The ultimate tool for managing your projects, tasks, and teams efficiently.
                 </p>
                 <Link

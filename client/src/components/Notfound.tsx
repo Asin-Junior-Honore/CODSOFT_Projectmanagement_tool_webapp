@@ -12,15 +12,15 @@ const NotFoundPage: React.FC = () => {
             </div>
 
             {/* Playful Message */}
-            <p className="text-gray-700 sm:text-lg md:text-xl lg:text-2xl mt-6">
-                Oops! This page is still under development. I am thinking of new content and cool things to add.
+            <p className=" sm:text-lg md:text-xl lg:text-2xl mt-6">
+                Sorry!🙇 This page is still under development. I am thinking of new content and cool things to add.
             </p>
 
             {/* Contact Information */}
-            <div className="text-gray-700 mt-6 space-y-2 sm:space-y-3 lg:space-y-4">
-                <p>If you have any ideas or suggestions, feel free to reach out!</p>
+            <div className=" mt-6 space-y-2 sm:space-y-3 lg:space-y-4">
+                <p>💡If you have any ideas or suggestions, feel free to reach out!, So <br /> we can collaborate😊</p>
                 <p>
-                    Contact me at <a href="mailto:asinhonore823@gmail.com" className="text-blue-500 underline">asinhonore823@gmail.com</a> with the subject "TaskAsin" for a quick response ✉️.
+                    Contact me at <a href="mailto:asinhonore823@gmail.com" className="text-red-900 underline"><strong>asinhonore823@gmail.com</strong></a> with the subject "TaskAsin" for a quick response ✉️.
                 </p>
             </div>
 
