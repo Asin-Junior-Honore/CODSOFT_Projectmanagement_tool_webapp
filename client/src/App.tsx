@@ -10,18 +10,14 @@ import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import TaskCreation from './pages/Tasks';
 import Projects from './pages/Projects';
-import { useColorContext } from './contexts/ThemeContext ';
-import NotFoundPage from './components/Notfound';
-
 const App: React.FC = () => {
-  const { bodyBg } = useColorContext();
   return (
     <Router>
       <div className="flex h-screen">
         <section>
-          <Navbar />
+          <Navbar /> {/* Include the Navbar */}
         </section>
-        <section className={`w-full ${bodyBg} py-4 px-4 overflow-y-auto no-scrollbar`}>
+        <section className="w-full bg-gradient-to-r from-blue-100 to-blue-300 py-[1rem] px-4 overflow-y-auto no-scrollbar">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
@@ -32,7 +28,6 @@ const App: React.FC = () => {
               <Route path="tasks" element={<TaskCreation />} />
               <Route path="profile" element={<Profile />} />
             </Route>
-            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </section>
       </div>

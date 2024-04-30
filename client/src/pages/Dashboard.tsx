@@ -4,7 +4,6 @@ import { FaBook, FaBullhorn, FaSpinner } from 'react-icons/fa';
 import { useCookies } from 'react-cookie';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
 const Dashboard: React.FC = () => {
     const [fullName, setFullName] = useState<string>('');
     const [personalTasksCount, setPersonalTasksCount] = useState<number>(0);
@@ -16,8 +15,6 @@ const Dashboard: React.FC = () => {
         const fetchDashboardData = async () => {
             try {
                 const response = await axios.get('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/dashboard', {
-
-
                     headers: {
                         Authorization: `Bearer ${cookies.UserToken}`,
                     },
@@ -35,7 +32,6 @@ const Dashboard: React.FC = () => {
                 setLoading(false);
             }
         };
-
         fetchDashboardData();
     }, []);
 

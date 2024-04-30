@@ -44,15 +44,15 @@ const Login: React.FC = () => {
 
   const axiosInstance = createAxiosInstance();
 
-
+  //logic to submit form
   const onSubmit: SubmitHandler<{ email: string; password: string }> = async (data) => {
     setIsSubmitting(true);
     try {
       const response = await axiosInstance.post('/v2/auth/login', data);
 
       // Store the user token in the cookies
-      console.log(response.data.Usertoken)
-      const userToken = response.data.Usertoken; // Assume the token is in 'userToken' key
+      //  console.log(response.data.Usertoken)
+      const userToken = response.data.Usertoken;
       if (userToken) {
         setCookie('UserToken', userToken);
       }
@@ -60,8 +60,6 @@ const Login: React.FC = () => {
       toast.success(response.data.message || 'Login successful!', {
         autoClose: 3000,
       });
-
-      // Redirect after a delay
       setTimeout(() => {
         navigate('/protected/dashboard');
       }, 2000);
@@ -76,6 +74,7 @@ const Login: React.FC = () => {
       toast.error(errorMessage, {
         autoClose: 5000,
       });
+      console.error(error)
     } finally {
       setIsSubmitting(false);
     }

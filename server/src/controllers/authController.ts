@@ -37,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
     }
 };
 
-
+//login controller
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
@@ -64,13 +64,13 @@ export const login = async (req: Request, res: Response) => {
         const token = jwt.sign(
             { userId: user._id, email: user.email },
             jwtSecret,
-            { expiresIn: '7d' } // Token expires in 7 days
+            { expiresIn: '7d' }
         );
 
-        // Send the token in the response body with a specific key
+
         res.status(200).json({
             message: 'Login successful',
-            Usertoken: token, // Include the JWT token with the key 'Usertoken'
+            Usertoken: token,
         });
     } catch (error) {
         console.error('Error during login:', error);

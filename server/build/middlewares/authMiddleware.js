@@ -27,7 +27,7 @@ const authenticateJWT = (req, res, next) => {
         }
         const decoded = jsonwebtoken_1.default.verify(token, jwtSecret);
         req.user = decoded; // Attach the decoded token data to the request
-        next(); // Token is valid, proceed to the next middleware
+        next();
     }
     catch (error) {
         console.error("JWT verification failed:", error);

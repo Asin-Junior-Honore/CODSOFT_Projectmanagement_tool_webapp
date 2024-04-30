@@ -17,13 +17,13 @@ const UserProfile: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [cookies] = useCookies(['UserToken']);
 
+    //userffect to fetch user profile
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
                 const response = await axios.get<UserProfile>(
                     'https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/profile',
                     {
-
                         headers: {
                             Authorization: `Bearer ${cookies.UserToken}`,
                         },

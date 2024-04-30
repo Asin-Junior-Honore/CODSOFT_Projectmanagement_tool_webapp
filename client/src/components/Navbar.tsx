@@ -32,10 +32,13 @@ const Navbar: React.FC = () => {
         setIsAuthenticated(tokenExists);
     }, [cookies]);
 
+    //logout logic
     const handleLogout = async () => {
         try {
             await axios.post('https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/logout', {}, {
-                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${cookies.UserToken}`,
+                },
             });
 
             removeCookie('UserToken');
@@ -55,7 +58,7 @@ const Navbar: React.FC = () => {
 
     return (
         <div className="flex h-screen">
-            <ToastContainer /> {/* Required for toast messages */}
+            <ToastContainer />
             <div
                 className={clsx(
                     'bg-gray-800 text-white transition-transform',
@@ -152,8 +155,6 @@ const Navbar: React.FC = () => {
                                 {isOpen && <span>Settings</span>}
                             </Link>
                         </li>
-
-
 
                         <li
                             className={clsx(

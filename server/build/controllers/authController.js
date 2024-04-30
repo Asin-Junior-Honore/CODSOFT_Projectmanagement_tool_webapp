@@ -48,6 +48,7 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.register = register;
+//login controller
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
@@ -67,12 +68,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!jwtSecret) {
             return res.status(500).json({ error: 'Server error' });
         }
-        const token = jsonwebtoken_1.default.sign({ userId: user._id, email: user.email }, jwtSecret, { expiresIn: '7d' } // Token expires in 7 days
-        );
-        // Send the token in the response body with a specific key
+        const token = jsonwebtoken_1.default.sign({ userId: user._id, email: user.email }, jwtSecret, { expiresIn: '7d' });
         res.status(200).json({
             message: 'Login successful',
-            Usertoken: token, // Include the JWT token with the key 'Usertoken'
+            Usertoken: token,
         });
     }
     catch (error) {

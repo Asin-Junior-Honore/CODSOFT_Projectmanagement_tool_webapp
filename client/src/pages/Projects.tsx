@@ -39,7 +39,6 @@ const Projects: React.FC = () => {
 
             const tasksData = response.data.tasks || [];
             setTasks(tasksData);
-
             if (tasksData.length === 0) {
                 toast.info('No tasks available at the momnt.');
             }
@@ -55,10 +54,9 @@ const Projects: React.FC = () => {
         fetchTasks();
     }, []);
 
-    //logic to update task status and potch status to server           
+    //logic to update task status       
     const toggleTaskStatusForward = async (task: Task) => {
         const newStatus = task.status === 'pending' ? 'in-progress' : 'completed';
-
         try {
             await axios.patch(
                 `https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/tasks/${task._id}/status`,
@@ -69,7 +67,6 @@ const Projects: React.FC = () => {
                     },
                 }
             );
-
             setTasks(tasks.map((t) => (t._id === task._id ? { ...t, status: newStatus } : t)));
         } catch (error) {
             console.error('Error updating task status:', error);
@@ -77,6 +74,7 @@ const Projects: React.FC = () => {
         }
     };
 
+    //logic to reverse task status
     const toggleTaskStatusBackward = async (task: Task) => {
         const newStatus =
             task.status === 'in-progress' ? 'pending' :
