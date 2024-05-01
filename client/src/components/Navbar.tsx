@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
             });
 
             removeCookie('UserToken');
-            toast.success('Logod out successsfully successful!', { autoClose: 2000 });
+            toast.success('Logged out successsfully!', { autoClose: 2000 });
             setIsAuthenticated(false);
             setTimeout(() => {
                 navigate('/login');
@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
             >
                 <div className="flex items-center justify-between p-4 border-b border-gray-700">
                     <Link to="/">
-                        <span className="text-lg font-bold">{isOpen ? 'TaskAsin' : 'TA'}</span>
+                        <span className="text-lg font-bold">{isOpen ? <p>Task<span className='text-blue-300'>Asin</span> </p> : 'TA'}</span>
                     </Link>
                     <button onClick={toggleSidebar} className="p-1 rounded-sm sm:hidden bg-blue-400"> {/* Only show button on mobile */}
                         <IoClose className='text-3xl text-black' />

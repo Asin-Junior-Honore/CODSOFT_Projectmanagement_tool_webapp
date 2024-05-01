@@ -20,7 +20,7 @@ const App: React.FC = () => {
       <div className="flex h-screen">
         <div className='absolute lg:hidden bg-gray-900 top-0 w-full py-[7px] pr-5 text-end'>
           <Link to={'/'}>
-            <h2 className='text-2xl text-white'>TaskAsin</h2>
+            <h2 className='text-2xl text-white'>Task<span className='text-blue-300'>Asin</span></h2>
           </Link>
         </div>
         <section>
