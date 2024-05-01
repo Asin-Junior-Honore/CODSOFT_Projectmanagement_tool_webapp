@@ -54,7 +54,8 @@ const Signup: React.FC = () => {
 
   const axiosInstance = createAxiosInstance();
 
-  ///logic to submit signup form
+
+  //logic to submit signup form
   const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     setIsSubmitting(true);
     try {
@@ -66,18 +67,29 @@ const Signup: React.FC = () => {
       setTimeout(() => {
         navigate('/login');
       }, 2000);
-
     } catch (error) {
-      let errorMessage = 'Sorry, something went wrong. Please try again.';
       if (axios.isAxiosError(error) && error.response) {
-        const { status, data } = error.response;
-        if (status === 400) {
-          errorMessage = data.error || data.message || errorMessage;
+        const { data } = error.response;
+        if (data.errors && Array.isArray(data.errors)) {
+          // Toast each error message individually
+          data.errors.forEach((err: { msg: any; }) => {
+            toast.error(err.msg || 'Validation error', {
+              autoClose: 5000,
+            });
+          });
+        } else {
+          // Default error message if there are no specific validation errors
+          const errorMessage = data.message || 'Sorry, something went wrong. Please try again.';
+          toast.error(errorMessage, {
+            autoClose: 5000,
+          });
         }
+      } else {
+        // Generic error message for non-Axios errors
+        toast.error('An unexpected error occurred. Please try again.', {
+          autoClose: 5000,
+        });
       }
-      toast.error(errorMessage, {
-        autoClose: 5000,
-      });
     } finally {
       setIsSubmitting(false);
     }

@@ -44,7 +44,6 @@ const Navbar: React.FC = () => {
 
             removeCookie('UserToken');
             toast.success('Logod out successsfully successful!', { autoClose: 2000 });
-
             setIsAuthenticated(false);
             setTimeout(() => {
                 navigate('/login');
