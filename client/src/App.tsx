@@ -9,11 +9,14 @@ import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import Signup from './pages/Signup';
 import TaskCreation from './pages/Tasks';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Projects from './pages/Projects';
 import NotFoundPage from './components/Notfound';
 const App: React.FC = () => {
   return (
     <Router>
+      <ToastContainer />
       <div className="flex h-screen">
         <div className='absolute lg:hidden bg-gray-900 top-0 w-full py-[7px] pr-5 text-end'>
           <Link to={'/'}>

@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa';
 import clsx from 'clsx';
 import axios from 'axios';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import { IoClose } from 'react-icons/io5';
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
             });
 
             removeCookie('UserToken');
-            toast.success('Logout successful!', { autoClose: 2000 });
+            toast.success('Logod out successsfully successful!', { autoClose: 2000 });
 
             setIsAuthenticated(false);
             setTimeout(() => {
@@ -59,12 +59,13 @@ const Navbar: React.FC = () => {
 
     return (
         <div className="flex h-screen">
+
             <div className='absolute top-[8px] ml-5 lg:hidden'>
                 <button onClick={toggleSidebar} className="p-1 rounded-sm absolute text-2xl sm:hidden  bg-blue-400">
                     <FaBars />
                 </button>
             </div>
-            <ToastContainer />
+
             <div
                 className={clsx(
                     'bg-gray-800 text-white transition-transform',

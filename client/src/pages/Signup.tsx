@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import axios from 'axios';
 import clsx from 'clsx';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -86,7 +86,6 @@ const Signup: React.FC = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="max-w-md mx-auto mt-10 p-5 bg-white shadow-md rounded">
         <h2 className="text-2xl font-bold text-center mb-5">
           Sign Up to Continue 🚀

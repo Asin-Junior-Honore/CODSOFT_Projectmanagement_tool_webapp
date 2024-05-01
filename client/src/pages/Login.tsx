@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
 import axios from 'axios';
 import clsx from 'clsx';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -50,14 +50,14 @@ const Login: React.FC = () => {
     try {
       const response = await axiosInstance.post('/v2/auth/login', data);
 
+      const { Usertoken, message } = response.data;
       // Store the user token in the cookies
       //  console.log(response.data.Usertoken)
-      const userToken = response.data.Usertoken;
-      if (userToken) {
-        setCookie('UserToken', userToken);
+      if (Usertoken) {
+        setCookie('UserToken', Usertoken);
       }
 
-      toast.success(response.data.message || 'Login successful!', {
+      toast.success(message || 'Login successful! Redirecting...', {
         autoClose: 3000,
       });
       setTimeout(() => {
@@ -86,7 +86,6 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="max-w-[35rem] mx-auto mt-[7.5rem] p-5 bg-white shadow-md rounded">
         <h2 className="text-2xl font-bold text-center mb-5">
           Login to Your Account 🔑
