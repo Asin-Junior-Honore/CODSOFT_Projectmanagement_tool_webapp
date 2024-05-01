@@ -8,7 +8,7 @@ const NotFoundPage: React.FC = () => {
             {/* 404 Header with Warning Icon */}
             <div className="flex flex-col items-center">
                 <FaExclamationTriangle className="text-6xl sm:text-7xl text-red-500" />
-                <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mt-4">404 Not Found</h1>
+                <h1 className="text-4xl sm:text-5xl font-bold text-gray-800 mt-4">404 Not Ready</h1>
             </div>
 
             {/* Playful Message */}

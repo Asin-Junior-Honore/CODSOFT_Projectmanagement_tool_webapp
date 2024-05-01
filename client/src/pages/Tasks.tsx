@@ -3,6 +3,7 @@ import axios from 'axios';
 import { FaPlus } from 'react-icons/fa';
 import { toast, ToastContainer, ToastContentProps } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
 
 // Interface for new task data
 interface NewTask {
@@ -20,6 +21,7 @@ const TaskCreation: React.FC = () => {
         assignedTo: 'personal',
     });
     const [loading, setLoading] = useState(false);
+    const [cookies] = useCookies(['UserToken']);
 
 
 
@@ -30,9 +32,13 @@ const TaskCreation: React.FC = () => {
             const response = await axios.post(
                 'https://codsoft-projectmanagement-tool-webapp.onrender.com/v2/auth/createtask',
                 newTask,
-                { withCredentials: true }
+                {
+                    headers: {
+                        Authorization: `Bearer ${cookies.UserToken}`,
+                    },
+                }
             );
-            console.log(response)
+            //  console.log(response)
             setNewTask({
                 name: '',
                 description: '',
