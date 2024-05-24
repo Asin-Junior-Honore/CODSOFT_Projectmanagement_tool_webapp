@@ -10,7 +10,7 @@ TaskAsin is a full-stack project management application that enables users to ma
 
 ## Key Features
 
-- **Task Management**: Create, and assign tasks with detailed descriptions, deadlines, and statuses. Assign tasks to individuals or teams for collaboration and tracking.
+- **Task Management**: Create, and assign tasks with detailed descriptions, and statuses. Assign tasks to individuals or teams for collaboration and tracking.
 - **User Authentication and Authorization**: Secure user authentication with JWT, allowing only authorized users to access protected routes and features. 🔒
 - **Input Validation and Sanitization**: All user inputs are validated and sanitized using Express Validator and Yup, ensuring data integrity and security. ✅
 - **Toast Notifications**: React Toastify is used to display success and error messages, providing real-time feedback to users. 🎉
