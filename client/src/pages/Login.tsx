@@ -1,22 +1,25 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
-import axios from 'axios';
-import clsx from 'clsx';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
+import axios from "axios";
+import clsx from "clsx";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 // Constants
-const BASE_URL = 'https://codsoft-projectmanagement-tool-webapp.onrender.com';
+const BASE_URL = "https://codsoft-projectmanagement-tool-webapp.onrender.com";
 
 // Validation Schema
 const loginSchema = yup.object({
-  email: yup.string().email('Invalid email format').required('Email is required'),
-  password: yup.string().required('Password is required'),
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
 });
 
 // Helper Function: Create Axios Instance
@@ -27,10 +30,9 @@ const createAxiosInstance = () => {
   });
 };
 
-
 const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [_, setCookie] = useCookies(['UserToken']);
+  const [_, setCookie] = useCookies(["UserToken"]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -45,44 +47,42 @@ const Login: React.FC = () => {
   const axiosInstance = createAxiosInstance();
 
   //logic to submit form
-  const onSubmit: SubmitHandler<{ email: string; password: string }> = async (data) => {
+  const onSubmit: SubmitHandler<{ email: string; password: string }> = async (
+    data
+  ) => {
     setIsSubmitting(true);
     try {
-      const response = await axiosInstance.post('/v2/auth/login', data);
+      const response = await axiosInstance.post("/v2/auth/login", data);
 
       const { Usertoken, message } = response.data;
       // Store the user token in the cookies
       //  console.log(response.data.Usertoken)
       if (Usertoken) {
-        setCookie('UserToken', Usertoken);
+        setCookie("UserToken", Usertoken);
       }
 
-      toast.success(message || 'Login successful! Redirecting...', {
+      toast.success(message || "Login successful! Redirecting...", {
         autoClose: 3000,
       });
       setTimeout(() => {
-        navigate('/protected/dashboard');
+        navigate("/protected/dashboard");
       }, 2000);
     } catch (error) {
-      let errorMessage = 'An error occurred during login. Please try again.';
+      let errorMessage = "An error occurred during login. Please try again.";
       if (axios.isAxiosError(error) && error.response) {
         const { status, data } = error.response;
         if (status === 400) {
-          errorMessage = data.error || data.message || 'Bad request.';
+          errorMessage = data.error || data.message || "Bad request.";
         }
       }
       toast.error(errorMessage, {
         autoClose: 5000,
       });
-      console.error(error)
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }
   };
-
-
-
-
 
   return (
     <>
@@ -99,10 +99,10 @@ const Login: React.FC = () => {
             <input
               type="text"
               id="email"
-              {...register('email')}
+              {...register("email")}
               className={clsx(
-                'w-full px-3 py-2 border rounded focus:outline-none',
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                "w-full px-3 py-2 border rounded focus:outline-none",
+                errors.email ? "border-red-500" : "border-gray-300"
               )}
             />
             {errors.email && (
@@ -117,12 +117,12 @@ const Login: React.FC = () => {
             </label>
             <div className="relative">
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 id="password"
-                {...register('password')}
+                {...register("password")}
                 className={clsx(
-                  'w-full px-3 py-2 border rounded focus:outline-none',
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                  "w-full px-3 py-2 border rounded focus:outline-none",
+                  errors.password ? "border-red-500" : "border-gray-300"
                 )}
               />
               <button
@@ -142,8 +142,8 @@ const Login: React.FC = () => {
           <button
             type="submit"
             className={clsx(
-              'w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out',
-              { 'opacity-50 cursor-not-allowed': isSubmitting }
+              "w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out",
+              { "opacity-50 cursor-not-allowed": isSubmitting }
             )}
             disabled={isSubmitting}
           >
@@ -152,14 +152,14 @@ const Login: React.FC = () => {
                 <FaSpinner className="animate-spin" /> Logging In...
               </span>
             ) : (
-              'Log In'
+              "Log In"
             )}
           </button>
         </form>
 
         {/* Signup Link */}
         <div className="text-center mt-5 text-sm text-gray-600">
-          Don't have an account?{' '}
+          Don't have an account?{" "}
           <Link to="/signup" className="text-blue-500 hover:underline">
             Sign up here!
           </Link>
