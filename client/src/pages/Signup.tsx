@@ -1,24 +1,27 @@
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { FaEye, FaEyeSlash, FaSpinner } from 'react-icons/fa';
-import axios from 'axios';
-import clsx from 'clsx';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { FaEye, FaEyeSlash, FaSpinner } from "react-icons/fa";
+import axios from "axios";
+import clsx from "clsx";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
 
 // Constants
-const BASE_URL = 'https://codsoft-projectmanagement-tool-webapp.onrender.com';
+const BASE_URL = "https://codsoft-projectmanagement-tool-webapp.vercel.app";
 
 // Validation Schema
 const signupSchema = yup.object({
-  fullName: yup.string().required('Full name is required'),
-  username: yup.string().required('Username is required'),
-  gender: yup.string().required('Gender is required'),
-  email: yup.string().email('Invalid email format').required('Email is required'),
-  password: yup.string().required('Password is required'),
+  fullName: yup.string().required("Full name is required"),
+  username: yup.string().required("Username is required"),
+  gender: yup.string().required("Gender is required"),
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
 });
 
 // Helper Function: Create Axios Instance
@@ -54,39 +57,40 @@ const Signup: React.FC = () => {
 
   const axiosInstance = createAxiosInstance();
 
-
   //logic to submit signup form
   const onSubmit: SubmitHandler<SignupFormValues> = async (data) => {
     setIsSubmitting(true);
     try {
-      const response = await axiosInstance.post('/v2/auth/register', data);
-      const successMessage = response.data?.message || 'Signup successful! Redirecting to login...';
+      const response = await axiosInstance.post("/v2/auth/register", data);
+      const successMessage =
+        response.data?.message || "Signup successful! Redirecting to login...";
       toast.success(successMessage, {
         autoClose: 5000,
       });
       setTimeout(() => {
-        navigate('/login');
+        navigate("/login");
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         const { data } = error.response;
         if (data.errors && Array.isArray(data.errors)) {
           // Toast each error message individually
-          data.errors.forEach((err: { msg: any; }) => {
-            toast.error(err.msg || 'Validation error', {
+          data.errors.forEach((err: { msg: any }) => {
+            toast.error(err.msg || "Validation error", {
               autoClose: 5000,
             });
           });
         } else {
           // Default error message if there are no specific validation errors
-          const errorMessage = data.message || 'Sorry, something went wrong. Please try again.';
+          const errorMessage =
+            data.message || "Sorry, something went wrong. Please try again.";
           toast.error(errorMessage, {
             autoClose: 5000,
           });
         }
       } else {
         // Generic error message for non-Axios errors
-        toast.error('An unexpected error occurred. Please try again.', {
+        toast.error("An unexpected error occurred. Please try again.", {
           autoClose: 5000,
         });
       }
@@ -94,7 +98,6 @@ const Signup: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
 
   return (
     <>
@@ -111,10 +114,10 @@ const Signup: React.FC = () => {
             <input
               type="text"
               id="fullName"
-              {...register('fullName')}
+              {...register("fullName")}
               className={clsx(
-                'w-full px-3 py-2 border rounded focus:outline-none',
-                errors.fullName ? 'border-red-500' : 'border-gray-300'
+                "w-full px-3 py-2 border rounded focus:outline-none",
+                errors.fullName ? "border-red-500" : "border-gray-300"
               )}
             />
             {errors.fullName && (
@@ -130,10 +133,10 @@ const Signup: React.FC = () => {
             <input
               type="text"
               id="username"
-              {...register('username')}
+              {...register("username")}
               className={clsx(
-                'w-full px-3 py-2 border rounded focus:outline-none',
-                errors.username ? 'border-red-500' : 'border-gray-300'
+                "w-full px-3 py-2 border rounded focus:outline-none",
+                errors.username ? "border-red-500" : "border-gray-300"
               )}
             />
             {errors.username && (
@@ -148,10 +151,10 @@ const Signup: React.FC = () => {
             </label>
             <select
               id="gender"
-              {...register('gender')}
+              {...register("gender")}
               className={clsx(
-                'w-full px-3 py-2 border rounded focus:outline-none',
-                errors.gender ? 'border-red-500' : 'border-gray-300'
+                "w-full px-3 py-2 border rounded focus:outline-none",
+                errors.gender ? "border-red-500" : "border-gray-300"
               )}
             >
               <option value="" disabled>
@@ -174,10 +177,10 @@ const Signup: React.FC = () => {
             <input
               type="text"
               id="email"
-              {...register('email')}
+              {...register("email")}
               className={clsx(
-                'w-full px-3 py-2 border rounded focus:outline-none',
-                errors.email ? 'border-red-500' : 'border-gray-300'
+                "w-full px-3 py-2 border rounded focus:outline-none",
+                errors.email ? "border-red-500" : "border-gray-300"
               )}
             />
             {errors.email && (
@@ -192,12 +195,12 @@ const Signup: React.FC = () => {
             </label>
             <div className="relative">
               <input
-                type={showPassword ? 'text' : 'password'}
+                type={showPassword ? "text" : "password"}
                 id="password"
-                {...register('password')}
+                {...register("password")}
                 className={clsx(
-                  'w-full px-3 py-2 border rounded focus:outline-none',
-                  errors.password ? 'border-red-500' : 'border-gray-300'
+                  "w-full px-3 py-2 border rounded focus:outline-none",
+                  errors.password ? "border-red-500" : "border-gray-300"
                 )}
               />
               <button
@@ -213,13 +216,12 @@ const Signup: React.FC = () => {
             )}
           </div>
 
-
           {/* Submit Button */}
           <button
             type="submit"
             className={clsx(
-              'w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out',
-              { 'opacity-50 cursor-not-allowed': isSubmitting }
+              "w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-150 ease-in-out",
+              { "opacity-50 cursor-not-allowed": isSubmitting }
             )}
             disabled={isSubmitting}
           >
@@ -228,14 +230,14 @@ const Signup: React.FC = () => {
                 <FaSpinner className="animate-spin" /> Submitting...
               </span>
             ) : (
-              'Sign Up'
+              "Sign Up"
             )}
           </button>
         </form>
 
         {/* Link to Login */}
         <div className="text-center mt-5 text-sm text-gray-600">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to="/login" className="text-blue-500 hover:underline">
             Log in here!
           </Link>

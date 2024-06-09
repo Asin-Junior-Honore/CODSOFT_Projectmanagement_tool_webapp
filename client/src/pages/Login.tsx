@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 // Constants
-const BASE_URL = "https://codsoft-projectmanagement-tool-webapp.onrender.com";
+const BASE_URL = "https://codsoft-projectmanagement-tool-webapp.vercel.app";
 
 // Validation Schema
 const loginSchema = yup.object({
